@@ -6,7 +6,7 @@ import FriendList from './src/components/FriendList';
 const App = () => (
     <View>
         <Header headerText={'Sabrina'} />
-        <FriendList/>
+        < FriendList />
     </View>
 );
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import axios from 'axios';
+import FriendDetail from './FriendDetail';
 
 class FriendList extends Component {
     state = { albums: [] };
@@ -10,11 +11,12 @@ class FriendList extends Component {
     }
 
     renderFriends() {
-        return this.state.albums.map(album => <Text>{album.title}</Text>);
+        return this.state.albums.map(album => 
+            <FriendDetail key={album.title} album={album} />
+        );
     }
 
     render() {
-        console.log(this.state);
         return (
             <View>
                 {this.renderFriends()}
