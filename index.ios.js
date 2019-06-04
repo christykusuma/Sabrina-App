@@ -4,7 +4,7 @@ import Header from './src/components/Header';
 import FriendList from './src/components/FriendList';
 
 const App = () => (
-    <View>
+    <View style={{ flex: 1 }}>
         <Header headerText={'Sabrina'} />
         < FriendList />
     </View>
