@@ -1,12 +1,16 @@
 import React from 'react';
 import { Text, View, Image, Linking } from 'react-native';
-import Card from './Card';
-import CardSection from './CardSection';
-import Button from './Button';
+import { Card, CardSection, Button } from '../common';
 
 const FriendDetail = ({ album }) => {
     const { title, artist, thumbnail_image, image, url } = album;
-    const { thumbnailStyle, headerContentStyle, thumbnailContainerStyle, headerTextStyle, imageStyle } = styles;
+    const { 
+        thumbnailStyle, 
+        headerContentStyle, 
+        thumbnailContainerStyle, 
+        headerTextStyle, 
+        imageStyle 
+    } = styles;
 
     return (
         <Card>
@@ -32,7 +36,7 @@ const FriendDetail = ({ album }) => {
             </CardSection>
         </Card>
     );
-}
+};
 
 const styles = {
     headerContentStyle: {
@@ -57,6 +61,6 @@ const styles = {
         flex: 1,
         width: null
     }
-}
+};
 
 export default FriendDetail;
