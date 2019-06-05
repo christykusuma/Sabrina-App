@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import firebase from 'firebase';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { firebaseConfig } from '../config';
-import { Button, Spinner } from './components/common';
-import LoginForm from './components/user/LoginForm';
+import { Button, Spinner, Header } from './common';
+import LoginForm from './user/components/LoginForm';
+import LibraryList from './library/components/LibraryList';
+// import FriendList from './inbox/components/FriendList';
+import reducers from './reducers';
 
-class AppContainer extends Component {
+class App extends Component {
     state = { loggedIn: null }
 
     componentWillMount() {
@@ -35,11 +40,17 @@ class AppContainer extends Component {
 
     render() {
         return (
-            <ScrollView>
-                {this.renderContent()}
-            </ScrollView>
+            <Provider store={createStore(reducers)}>
+                <View style={{ flex: 1 }}>
+                    <Header headerText="Sabrina" />
+                    <ScrollView>
+                        {/* {this.renderContent()} */}
+                        <LibraryList />
+                    </ScrollView>
+                </View>
+            </Provider>
         );
     }
 }
 
-export default AppContainer;
+export default App;
