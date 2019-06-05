@@ -1,44 +1,42 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import firebase from 'firebase';
-import { Button, Card, CardSection, Input, Spinner } from '../../common';
+import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
+import { emailChanged, passwordChanged, loginUser } from '../../actions';
+import { Card, CardSection, Input, Button, Spinner } from '../../common';
 
 class LoginForm extends Component {
-    state = { email: '', password: '', error: '', loading: false };
+    onEmailChange = (text) => {
+        this.props.emailChanged(text);
+    }
+
+    onPasswordChange = (text) => {
+        this.props.passwordChanged(text);
+    }
 
     onButtonPress = () => {
-        const { email, password } = this.state;
-        this.setState({ error: '', loading: true }); // clear error
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(this.onLoginSuccess())
-            .catch(() => {
-                firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(this.onLoginSuccess())
-                    .catch(this.onLoginFail());
-            });
+        const { email, password } = this.props;
+        this.props.loginUser({ email, password });
     }
 
-    onLoginFail = () => {
-        this.setState({ error: 'Authentication Failed', loading: false });
-    }
-
-    onLoginSuccess = () => {
-        this.setState({
-            email: '',
-            password: '',
-            loading: false,
-            error: ''
-        });
+    renderError = () => {
+        if (this.props.error) {
+            return (
+                <View style={{ backgroundColor: 'white' }}>
+                    <Text style={styles.errorTextStyle}>
+                        {this.props.error}
+                    </Text>
+                </View>
+            );
+        }
     }
 
     renderButton = () => {
-        if (this.state.loading) {
+        if (this.props.loading) {
             return <Spinner size="small" />;
         } 
 
         return (
-            <Button onPress={this.onButtonPress}>
+            <Button onPress={this.onButtonPress.bind(this)}>
                 Login
             </Button>
         );
@@ -50,23 +48,21 @@ class LoginForm extends Component {
                 <CardSection>
                     <Input 
                         label="Email"
-                        onChangeText={email => this.setState({ email })}
-                        value={this.state.email}
+                        onChangeText={text => this.onEmailChange(text)}
+                        value={this.props.email}
                         placeholder="user@gmail.com"
                     />
                 </CardSection>
                 <CardSection>
                     <Input 
                         label="Password"
-                        onChangeText={password => this.setState({ password })}
-                        value={this.state.password}
+                        onChangeText={text => this.onPasswordChange(text)}
+                        value={this.props.password}
                         placeholder="password"
                         secureTextEntry
                     />
                 </CardSection>
-                <Text style={styles.errorTextStyle}>
-                    {this.state.error}
-                </Text>
+                {this.renderError()}
                 <CardSection>
                     {this.renderButton()}
                 </CardSection>
@@ -83,4 +79,11 @@ const styles = {
     }
 };
 
-export default LoginForm;
+const mapStateToProps = ({ user }) => {
+    const { email, password, error, loading } = user;
+    return { email, password, error, loading };
+};
+
+export default connect(mapStateToProps, { 
+    emailChanged, passwordChanged, loginUser 
+})(LoginForm);
