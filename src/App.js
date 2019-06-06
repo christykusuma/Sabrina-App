@@ -8,8 +8,9 @@ import { firebaseConfig } from '../config';
 import { Button, Spinner, Header } from './common';
 import LoginForm from './user/components/LoginForm';
 import LibraryList from './library/components/LibraryList';
-
 // import FriendList from './inbox/components/FriendList';
+import RouterComponent from './Router';
+
 import reducers from './reducers';
 
 class App extends Component {
@@ -46,17 +47,20 @@ class App extends Component {
 
         return (
             <Provider store={store}>
-                <View style={{ flex: 1 }}>
-                    <Header headerText="Sabrina" />
-                    <ScrollView>
-                        <LoginForm />
-                        {/* {this.renderContent()} */}
-                        {/* <LibraryList /> */}
-                    </ScrollView>
-                </View>
+                <RouterComponent />
             </Provider>
         );
     }
 }
 
 export default App;
+
+                // {/* <View style={{ flex: 1 }}>
+                //     <Header headerText="Sabrina" />
+                //     <ScrollView>
+                //         <LoginForm />
+                //         {/* {this.renderContent()} */}
+                //         {/* <LibraryList /> */}
+                //         <RouterComponent />
+                //     </ScrollView>
+                // </View> */}
