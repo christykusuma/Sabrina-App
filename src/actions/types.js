@@ -7,3 +7,4 @@ export const LOGIN_USER = 'login_user';
 export const UPDATE_EMPLOYEE = 'update_empoyee';
 export const CREATE_EMPLOYEE = 'create_empoyee';
 export const EMPLOYEES_FETCH_SUCCESS = 'employees_fetch_success';
+export const EMPLOYEE_SAVE_SUCCESS = 'employee_save_success';
