@@ -55,12 +55,12 @@ class App extends Component {
 
 export default App;
 
-                // {/* <View style={{ flex: 1 }}>
-                //     <Header headerText="Sabrina" />
-                //     <ScrollView>
-                //         <LoginForm />
-                //         {/* {this.renderContent()} */}
-                //         {/* <LibraryList /> */}
-                //         <RouterComponent />
-                //     </ScrollView>
-                // </View> */}
+// {/* <View style={{ flex: 1 }}>
+//     <Header headerText="Sabrina" />
+//     <ScrollView>
+//         <LoginForm />
+//         {/* {this.renderContent()} */}
+//         {/* <LibraryList /> */}
+//         <RouterComponent />
+//     </ScrollView>
+// </View> */}
